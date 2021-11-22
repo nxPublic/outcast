@@ -1,0 +1,5 @@
+node_modules/
+.idea/
+modules/secret2/
+.git/
+./
