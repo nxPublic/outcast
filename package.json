@@ -3,7 +3,7 @@
   "version": "0.1",
   "description": "Outcast - Discord Community Bot",
   "main": "server.js",
-  "author": "https://github.com/Sublimity-Studio/outcast",
+  "author": "Sublimity Studio",
   "scripts": {
     "start": "node server.js"
   },
@@ -19,16 +19,17 @@
     "node": "16.6"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
+    "type": "git",
+    "url": "https://github.com/Sublimity-Studio/outcast"
   },
   "license": "MIT",
   "keywords": [
     "node",
     "grim dawn",
-	"farthest frontier",
-	"crate entertainment",
-	"community",
-	"discord",
-	"bot"
+    "farthest frontier",
+    "crate entertainment",
+    "community",
+    "discord",
+    "bot"
   ]
 }
