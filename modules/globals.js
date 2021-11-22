@@ -6,3 +6,20 @@ const {Routes} = require("discord-api-types/v9");
 
 //Other Modules
 global.dotenv = require("dotenv").config();
+global.Twit = require('twit');
+global.colors = require('colors');
+global.fetch = require('node-fetch');
+global.axios = require('axios');
+global.fs = require ('fs');
+global.mysql = require('mysql');
+global.MysqlConnection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'outcast',
+    password : 'outcast',
+    database : 'theoutca_discord'
+});
+
+
+//Our Modules
+global.twitter = require('./twitter/main.js');
+global.twitch = require('./twitch/main.js');
