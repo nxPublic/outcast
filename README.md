@@ -5,10 +5,20 @@
 # Outcast
 This is the repository of the Grim Dawn &amp; Farthest Frontier Community Discord Bot.
 
+# Functionality
+
+* Post Twitter posts from @GrimDawn
+* Post Twitch Streams from CrateEntertainment
+* Post a embed to a channel everytime a developer posts in the forum with details.
+
+* TODO: Ranking
+* TODO: Website & HTTP gate
+
+
 # Repository Specifics
 
 * The folder modules/ contains all main functionalities of the bot, split by folder and module.
-* The folder modules/forumTracker/posts contains all Crate Forum tracked posts. *I recommend updating these files first yourself if you want to use this bot to any extend, otherwise it will post every post since the beginning of the forum from each employee. You can let the bot generate the files if you start it with the global variable Debug set to True in Server.js.* **THIS FUNCTIONALITY REQUIRES A API KEY TO THE FORUM** 
+* The folder modules/forumTracker/posts contains all Crate Forum tracked posts. *I recommend updating these files first yourself if you want to use this bot to any extend, otherwise it will post every post since the beginning of the forum from each employee. You can let the bot generate the files if you start it with the global variable Debug set to True in Server.js.* **THIS FUNCTIONALITY REQUIRES A DISCOURSE API KEY TO THE FORUM** 
 
 # Development History
 The original version *(and the idea)* of this bot was written by [evanronnei (Kidpid)](https://github.com/evanronnei/OutcastBot) in ~2016 with C Sharp. He hosted the bot on his Rasperry Pi first, for several months.
