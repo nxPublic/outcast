@@ -40,4 +40,4 @@ As soon as this repository reaches a acceptable and working stage, i will create
 That should ensure that the latest state of the Repository is always the one running on the Server.
 
 # Support
-If you would like to support this bot / community you can find the patreon responsible to pay for Discord boosts and Hosting costs [here](https://www.patreon.com/grimdawn).
+If you would like to support this bot / community you can find the patreon responsible to pay for Discord boosts and Hosting costs [here at https://www.patreon.com/grimdawn](https://www.patreon.com/grimdawn).
