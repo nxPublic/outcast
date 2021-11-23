@@ -28,18 +28,6 @@ exports.startTwitter = async function (client) {
             const channel = await client.channels.cache.get('912336981638402068');
             channel.send(url);
 
-            const tweetIDValue = tweet.id_str.toString();
-
-            //Connect MySQL
-            MysqlConnection.connect();
-            const sql = `INSERT INTO twitter (post_id) VALUES (${tweetIDValue})`;
-            MysqlConnection.query(sql, function (err, result) {
-                if (err) throw err;
-                console.log("Tweet ID logged in DB.");
-            });
-            MysqlConnection.end();
-
-
         }
     })
 
