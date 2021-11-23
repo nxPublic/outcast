@@ -15,7 +15,7 @@ exports.startTwitter = async function (client, channel) {
     let twitterID_test = 2899773086; // Posts every 3 minutes.
 
 
-    let stream = T.stream('statuses/filter', {follow: twitterID_test});
+    let stream = T.stream('statuses/filter', {follow: twitterID});
 
     stream.on('tweet', async function (tweet) {
 
