@@ -18,6 +18,7 @@ This is the repository of the Grim Dawn &amp; Farthest Frontier Community Discor
 # Repository Specifics
 
 * The folder modules/ contains all main functionalities of the bot, split by folder and module.
+* The file modules/global.js is used to import all and load all important globally required libraries and settings.
 * The folder modules/forumTracker/posts contains all Crate Forum tracked posts. *I recommend updating these files first yourself if you want to use this bot to any extend, otherwise it will post every post since the beginning of the forum from each employee. You can let the bot generate the files if you start it with the global variable Debug set to True in Server.js.* **THIS FUNCTIONALITY REQUIRES A DISCOURSE API KEY TO THE FORUM** 
 
 # Development History
