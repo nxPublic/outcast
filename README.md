@@ -38,3 +38,6 @@ I have the hope that we and the the Grim Dawn & Farthest Frontier community can 
 # Hosting
 As soon as this repository reaches a acceptable and working stage, i will create a Branch that will auto deploy to the Root server on Branch change.
 That should ensure that the latest state of the Repository is always the one running on the Server.
+
+# Support
+If you would like to support this bot / community you can find the patreon responsible to pay for Discord boosts and Hosting costs [here](https://www.patreon.com/grimdawn).
