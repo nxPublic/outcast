@@ -31,7 +31,9 @@ We will add everything from the original bot over time to this repository where 
 
 Now entering the stage of LTS and the approach of the release of Farthest Frontier (Crate Entertainments second game after Grim Dawn), it is clear that i cannot curate this project alone and neither do i want people to be dependend on me.
 
-I have the hope that the the Grim Dawn & Farthest Frontier community can work together and report issues/bugs, maybe even fix them themself in this repository.
+A special thanks to the assistance of [NCJ](https://github.com/ncjsvr) for helping me brining everything back up to date and listing to my ramblings in discord.
+
+I have the hope that we and the the Grim Dawn & Farthest Frontier community can work together and report issues/bugs, maybe even fix them themself in this repository.
 
 # Hosting
 As soon as this repository reaches a acceptable and working stage, i will create a Branch that will auto deploy to the Root server on Branch change.
