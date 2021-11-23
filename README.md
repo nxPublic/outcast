@@ -5,6 +5,11 @@
 # Outcast
 This is the repository of the Grim Dawn &amp; Farthest Frontier Community Discord Bot.
 
+# Repository Specifics
+
+* The folder modules/ contains all main functionalities of the bot, split by folder and module.
+* The folder modules/forumTracker/posts contains all Crate Forum tracked posts. *I recommend updating these files first yourself if you want to use this bot to any extend, otherwise it will post every post since the beginning of the forum.*
+
 # Development History
 The original version *(and the idea)* of this bot was written by [evanronnei (Kidpid)](https://github.com/evanronnei/OutcastBot) in ~2016 with C Sharp. He hosted the bot on his Rasperry Pi first, for several months.
 The C Sharp library used for the Bot got regularly outdated and caused a lot of work to update the bot every month. That was unsustainable for the long term.

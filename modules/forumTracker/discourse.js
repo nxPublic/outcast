@@ -86,7 +86,13 @@ class grimDawnForumTracker {
                         };
                         let channel = await server.channels.cache.find(r => r.name === "test");
 
-                        channel.send({ embeds: [embed] });
+                        let isAlreadyPosted = await registerPost(post.post.id, post.author.name);
+
+                        if(!isAlreadyPosted){
+                            console.log("POST " + post.post.id);
+                            //channel.send({ embeds: [embed] });
+                        }
+
 
                     }
                 }
@@ -121,11 +127,27 @@ function decodeHTMLEntities(text) {
     return text;
 }
 
-async function registerForumPost(id, json){
-    // TODO:
-}
-async function postsIsRegisterd(id){
-    // TODO:
+async function registerPost(id, name){
+    let path = '\\posts\\' + name + ".json";
+
+    let isPresent = false;
+    let isNewFile = false;
+    // check if file is present
+    if(!await fs.existsSync(__dirname + path)) {
+        // Create file if it doesnt exist
+        await fs.appendFileSync(__dirname + path, id + ",");
+        isNewFile = true;
+    }else{
+        // If file exist
+        let ids = await fs.readFileSync(__dirname + path).toString().split(",");
+        isPresent = ids.includes(`${id}`); // The string conversion is required.
+    }
+
+    if(!isPresent && isNewFile === false) {
+        await fs.appendFileSync(__dirname + path, id + ",");
+    }
+
+    return isPresent;
 }
 
 module.exports = grimDawnForumTracker;
