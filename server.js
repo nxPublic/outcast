@@ -10,8 +10,10 @@ client.on("ready", async () => {
     if(server === undefined){
         console.log(`ERROR: Could not find Guild by specified ID.`);
         process.exit(1); // Quit process if the guild is not found.
-    }else
+    }else{
         console.log(`Found ${server.name} Server`);
+        global.server = server;
+    }
 
     // Start Twitter listener
     let twitterChannel = await server.channels.cache.get("912336981638402068");
@@ -22,6 +24,15 @@ client.on("ready", async () => {
     let twitchChannel = await server.channels.cache.get("912336981638402068");
     if(twitchChannel !== undefined)
         twitch.startTwitch(client, twitchChannel);
+
+    // Start Discourse Tracking (Forum Tracker)
+    await require('./modules/forumTracker/getCategories');
+
+    // Loop employees ?
+
+    let list = employees.members;
+    await new ForumTracker(list[1].username);
+
 
 });
 

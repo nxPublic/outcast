@@ -1,12 +1,12 @@
 
-var T = new Twit({
+let T = new Twit({
     consumer_key: process.env.twitter_consumer_key,
     consumer_secret: process.env.twitter_consumer_secret,
     access_token: process.env.twitter_access_token,
     access_token_secret: process.env.twitter_access_token_secret,
     timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
     strictSSL: true,     // optional - requires SSL certificates to be valid.
-})
+});
 // @GrimDawn TwitterID: 106252041
 
 exports.startTwitter = async function (client, channel) {

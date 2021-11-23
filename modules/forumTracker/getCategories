@@ -1,0 +1,47 @@
+
+async function loadCategories (){
+
+    let categories = [];
+    let subCategories = [];
+
+    // https://forums.crateentertainment.com/categories.json
+    let mainCategories = await axios.get("https://forums.crateentertainment.com/categories.json");
+    // data.category_list.categories [{id:, name:, color:, subcategory_ids: [0,0]},]
+    mainCategories = mainCategories.data; // unwrap response data
+
+    let l = mainCategories["category_list"]["categories"];
+    for(let i in l){
+        let thisCategory = l[i];
+        categories[thisCategory.id] = {
+            id: thisCategory.id,
+            name: thisCategory.name,
+            data: thisCategory
+        };
+
+        // https://forums.crateentertainment.com/categories.json?parent_category_id={mainCategory:id}.json
+        let subCategoriesData = await axios.get(`https://forums.crateentertainment.com/categories.json?parent_category_id=${thisCategory.id}.json`);
+        // category_list.categories
+
+        let listOfSubCategories = subCategoriesData.data["category_list"]["categories"];
+        categories[thisCategory.id].categories = listOfSubCategories;
+
+        // Makes searching for sub categories easier and doesn't require a filter function.
+        for(let ix in listOfSubCategories){
+            let thisSubCategorie = listOfSubCategories[ix];
+            subCategories[thisSubCategorie.id] = {
+                name : thisSubCategorie.name,
+                id : thisSubCategorie.id,
+                parent : {
+                    name: thisCategory.name,
+                    id: thisSubCategorie.id
+                }
+            }
+        }
+    }
+    global.subCategories = subCategories;
+    global.categories = categories;
+
+    return true;
+}
+
+module.exports = loadCategories();
