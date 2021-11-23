@@ -9,9 +9,13 @@ var T = new Twit({
 })
 // @GrimDawn TwitterID: 106252041
 
-exports.startTwitter = async function (client) {
+exports.startTwitter = async function (client, channel) {
 
-    let stream = T.stream('statuses/filter', {follow: '2899773086'});
+    let twitterID = 106252041;
+    let twitterID_test = 2899773086; // Posts every 3 minutes.
+
+
+    let stream = T.stream('statuses/filter', {follow: twitterID_test});
 
     stream.on('tweet', async function (tweet) {
 
@@ -25,7 +29,7 @@ exports.startTwitter = async function (client) {
         } else {
 
             const url = "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str;
-            const channel = await client.channels.cache.get('912336981638402068');
+
             channel.send(url);
 
         }

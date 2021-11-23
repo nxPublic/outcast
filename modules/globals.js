@@ -11,13 +11,7 @@ global.colors = require('colors');
 global.fetch = require('node-fetch');
 global.axios = require('axios');
 global.fs = require ('fs');
-global.mysql = require('mysql');
-global.MysqlConnection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'outcast',
-    password : 'outcast',
-    database : 'theoutca_discord'
-});
+
 
 
 //Our Modules
