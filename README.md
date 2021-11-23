@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./logo.png" alt="Outcast Logo"/>
+</p>
+
 # Outcast
 This is the repository of the Grim Dawn &amp; Farthest Frontier Community Discord Bot.
 
