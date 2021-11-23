@@ -90,7 +90,8 @@ class grimDawnForumTracker {
 
                         if(!isAlreadyPosted){
                             console.log("POST " + post.post.id);
-                            //channel.send({ embeds: [embed] });
+                            if(global.debug !== true)
+                                channel.send({ embeds: [embed] });
                         }
 
 

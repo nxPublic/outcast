@@ -1,6 +1,7 @@
 // Globals
 require('./modules/globals.js');
 
+global.debug = true;
 
 client.on("ready", async () => {
     console.log(`✔ Logged in as ${client.user.username}`);
