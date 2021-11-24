@@ -2,7 +2,7 @@
 // Now its back.
 
 
-exports.check = async function (message, channel) {
+exports.check = async function (message) {
 
     if(message.content.length > 20) // Don't process messages with more than 5 characters.
         return;
@@ -14,7 +14,7 @@ exports.check = async function (message, channel) {
             message.delete();
 
         //channel.send({files: "https://cdn.discordapp.com/emojis/" + combo + ".png?size=48"})
-        channel.send({ files: [{ attachment: "https://cdn.discordapp.com/emojis/" + combo + ".png?size=48" }] });
+        message.channel.send({ files: [{ attachment: "https://cdn.discordapp.com/emojis/" + combo + ".png?size=48" }] });
     }
     let b;
 

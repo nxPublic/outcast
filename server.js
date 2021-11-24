@@ -54,7 +54,7 @@ client.on("ready", async () => {
 });
 
 client.on("messageCreate", async (message) => {
-    global.thinkMatics.check(message, message.channel);
+    global.thinkMatics.check(message);
 });
 
 
