@@ -1,11 +1,14 @@
-// NOTE: The idea for this was originally made by KidPid in 2016, we retired this when we switched to Javascript base in 2017~2018
+// NOTE: The idea and first implementation for this was originally made by KidPid in 2016, we retired this when we switched to a Javascript base in 2017~2018
 // Now its back.
 
 
 exports.check = async function (message) {
 
-    if(message.content.length > 20) // Don't process messages with more than 5 characters.
+    if(message.content.length > 70)
+        // Don't process messages with more than 70 characters.
+        // Maximum emoji name length is 32 characters.
         return;
+
 
     let combo = isValidEmojiCombination(message.content);
     if(message.content.includes("🤔") && combo !== false){
@@ -21,7 +24,6 @@ exports.check = async function (message) {
 };
 
 function isValidEmojiCombination(messageText){
-
     for(i in combinations){
         if(messageText.includes(combinations[i].required))
             return combinations[i].id; // return true if the emoji is in the list
