@@ -8,9 +8,39 @@ const {Routes} = require("discord-api-types/v9");
 global.dotenv = require("dotenv").config();
 global.Twit = require('twit');
 global.colors = require('colors');
-global.fetch = require('node-fetch');
 global.axios = require('axios');
 global.fs = require ('fs');
+
+// Misc custom helper functions
+function timeAge (date) {
+
+    let seconds = Math.floor((new Date() - date) / 1000);
+
+    let interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+}
+global.timeAge = timeAge;
+
 
 // Initialize Discourse API access
 // Required for Forum Tracking of Crate Employees
@@ -38,6 +68,9 @@ if(!global.skipTracker){
 //Social Media Modules
 global.twitter = require('./twitter/main.js');
 global.twitch = require('./twitch/main.js');
+
+// Auto Embeds
+global.forumEmbeds = require('./forumEmbeds/main.js');
 
 //ThinkMatics™ by KidPid
 //Essentially a joke function that answers to text messages with emojis that are a mix of the 2 posted while removing the original ones.

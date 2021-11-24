@@ -54,7 +54,27 @@ client.on("ready", async () => {
 });
 
 client.on("messageCreate", async (message) => {
-    global.thinkMatics.check(message);
+
+    //C Suppress potential exploits
+    message.content = message.content.trim().replace("@here", " here").replace("@everyone", " everyone");
+
+    // Thinkmatics
+    thinkMatics.check(message);
+
+    // Auto Forum Embeds
+    if(message.content.includes("https://forums.crateentertainment.com/t/")){
+        let link = forumEmbeds.hasValidLink(message.content);
+        if(link !== false){
+            let embed = await forumEmbeds.embed(link);
+            message.channel.send({embeds: [embed]}).then(function (botMessage) {
+                if(forumEmbeds.isOnlyForumLink(message.content))
+                    try { // in case the bot misses permissions to remove the message.
+                        message.delete();
+                    }catch(error) { console.error(error);}
+            });
+        }
+    }
+
 });
 
 
