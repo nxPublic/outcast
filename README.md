@@ -4,12 +4,17 @@
 
 # Outcast
 This is the repository of the Grim Dawn &amp; Farthest Frontier Community Discord Bot.
+If you would like to know more about the functionalities and usage of the Bot in practise [check out the webiste](http://theoutcast.de).
 
 # Functionality
+
+* Website with Ranking and in-depth descriptions of all functionalities. [You can find it here](http://theoutcast.de).
 
 * Post Twitter posts from @GrimDawn
 * Post Twitch Streams from CrateEntertainment
 * Post a embed to a channel everytime a developer posts in the forum with details.
+* Post a embed when a official forum link is posted from the Grim Dawn or Farthest Frontier forum. Incuding removing the link if its only a link without additional context in the message.
+* ThinkMatics™ ![thinkmatics](./thunk.png)  
 
 * TODO: Ranking
 * TODO: Website & HTTP gate
