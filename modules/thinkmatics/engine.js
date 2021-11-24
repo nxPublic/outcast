@@ -19,7 +19,6 @@ exports.check = async function (message) {
         //channel.send({files: "https://cdn.discordapp.com/emojis/" + combo + ".png?size=48"})
         message.channel.send({ files: [{ attachment: "https://cdn.discordapp.com/emojis/" + combo + ".png?size=48" }] });
     }
-    let b;
 
 };
 
