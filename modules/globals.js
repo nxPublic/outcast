@@ -13,26 +13,32 @@ global.axios = require('axios');
 global.fs = require ('fs');
 
 // Initialize Discourse API access
-global.employees = require('./forumTracker/employees.json'); // Crate Entertainment - Employees
-global.moderators = require('./forumTracker/moderators.json'); // Crate Entertainment - Forum Moderators
-const discourse = require('discourse-sdk');
-let discourseCredentials = {
-    "url" : "https://forums.crateentertainment.com/",
-    "user" : "TheOutcast",
-    "key" : process.env.FORUMAPIKEY,
-    "urls" : {
-        "privateMessages" : "topics/private-messages/TheOutcast.json",
-        "profile" : function (profileName) { return "/u/" + profileName + ".json";},
-        "profileActivity" : function (profileName) { return "/u/" + profileName + "/activity.json";},
-        "profileActions" : "/user_actions.json",
-        "newMessage" : "/post"
-    }
-};
-global.discourseClient = new discourse(discourseCredentials.url, discourseCredentials.key, discourseCredentials.user);
-discourseClient.discourseCredentials = discourseCredentials;
-global.ForumTracker = require('./forumTracker/discourse.js');
+// Required for Forum Tracking of Crate Employees
+if(!global.skipTracker){
+    global.employees = require('./forumTracker/employees.json'); // Crate Entertainment - Employees
+    global.moderators = require('./forumTracker/moderators.json'); // Crate Entertainment - Forum Moderators
+    const discourse = require('discourse-sdk');
+    let discourseCredentials = {
+        "url" : "https://forums.crateentertainment.com/",
+        "user" : "TheOutcast",
+        "key" : process.env.FORUMAPIKEY,
+        "urls" : {
+            "privateMessages" : "topics/private-messages/TheOutcast.json",
+            "profile" : function (profileName) { return "/u/" + profileName + ".json";},
+            "profileActivity" : function (profileName) { return "/u/" + profileName + "/activity.json";},
+            "profileActions" : "/user_actions.json",
+            "newMessage" : "/post"
+        }
+    };
+    global.discourseClient = new discourse(discourseCredentials.url, discourseCredentials.key, discourseCredentials.user);
+    discourseClient.discourseCredentials = discourseCredentials;
+    global.ForumTracker = require('./forumTracker/discourse.js');
+}
 
-
-//Our Modules
+//Social Media Modules
 global.twitter = require('./twitter/main.js');
 global.twitch = require('./twitch/main.js');
+
+//ThinkMatics™ by KidPid
+//Essentially a joke function that answers to text messages with emojis that are a mix of the 2 posted while removing the original ones.
+global.thinkMatics = require('./thinkmatics/engine.js');

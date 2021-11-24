@@ -2,6 +2,7 @@
 require('./modules/globals.js');
 
 global.debug = false;
+global.skipTracker = true; // If set to true, the Forum Tracker will not initialize.
 
 client.on("ready", async () => {
     console.log(`✔ Logged in as ${client.user.username}`);
@@ -31,18 +32,20 @@ client.on("ready", async () => {
 
     // Loop all employees for the Forum Tracker
     try {
-        let list = employees.members; // these are all known crate entertainment employees
-        for (let user in list) {
-            if (list[user].id !== undefined && list[user].username !== undefined) {
-                let interv = (Math.floor(Math.random() * 100) + 60) * 5000; // random interval calculation so we don't rate limit ourselves
-                setInterval(
-                    async function () {
-                        await new ForumTracker(list[user].username);
-                    }
-                    , interv
-                );
-                await new ForumTracker(list[user].username);
-                console.log(`Tracker created for ${list[user].username} with a interval of ${(interv / 1000)}s`.blue);
+        if(!skipTracker){
+            let list = employees.members; // these are all known crate entertainment employees
+            for (let user in list) {
+                if (list[user].id !== undefined && list[user].username !== undefined) {
+                    let interv = (Math.floor(Math.random() * 100) + 60) * 5000; // random interval calculation so we don't rate limit ourselves
+                    setInterval(
+                        async function () {
+                            await new ForumTracker(list[user].username);
+                        }
+                        , interv
+                    );
+                    await new ForumTracker(list[user].username);
+                    console.log(`Tracker created for ${list[user].username} with a interval of ${(interv / 1000)}s`.blue);
+                }
             }
         }
     }catch(error) { console.error(error);}
@@ -50,7 +53,9 @@ client.on("ready", async () => {
 
 });
 
-
+client.on("messageCreate", async (message) => {
+    global.thinkMatics.check(message, message.channel);
+});
 
 
 
