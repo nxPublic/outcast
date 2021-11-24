@@ -62,5 +62,5 @@ exports.startTwitch = async function (client, channel) {
 
 };
 
-console.log("Twitch loaded".blue);
+console.log("Twitch loaded".green);
 

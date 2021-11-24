@@ -40,5 +40,5 @@ exports.startTwitter = async function (client, channel) {
 
 };
 
-console.log("Twitter loaded".blue);
+console.log("Twitter loaded".green);
 
