@@ -17,6 +17,14 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Posts a embed when a official forum link is posted from the Grim Dawn or Farthest Frontier forum. Incuding removing the link if its only a link without additional context in the message.
 * <img src="./thunk.png" width="16" height="16"> ThinkMatics™
 
+# Planned
+
+* Bring back the !tag functionalities.
+* Re-work the Twitter and Twitch Embeds.
+* Create a function to generate the server rules.
+* Create a function to generate news posts.
+* Actually upload and host the bot
+* Publish this repository
 
 # Repository Specifics
 
