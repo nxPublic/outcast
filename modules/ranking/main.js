@@ -78,24 +78,42 @@ exports.addExp = async function (message) {
     if(data.status === undefined || data.status !== 200){
         return false;
     }
-    let response = data.data; // unwrap
+    // read new rank returned from the http gate
+    let newRank = data.data["name"];
 
     // check if the current rank is the same rank after gaining exp.
-    let newRank = response["name"];
-
     if(currentRank !== newRank)
         if(currentRank === false){
             // assign new rank
+            grantUserRole(message.member, newRank);
         }else{
-            // remove old rank
+            // remove all old rank
+            removeAllRankRoles(message.member, message.member.roles.cache);
             // assign new rank
+            grantUserRole(message.member, newRank);
         }
 
-    let b;
-
-    // if adjustment is required, remove all rank roles and re-add the appropriate one.
-
+    return true;
 };
 
+async function getRoleByName(name) {
+    let role = await server.roles.cache.find(r => r.name === name);
+
+    // return false if the role is not found.
+    if(role === undefined || role === false)
+        return false;
+
+    return role;
+}
+
+async function grantUserRole(member, role){
+    let roleToAssign = await getRoleByName(role);
+    if(roleToAssign){
+        await member.roles.add(roleToAssign);
+        return true;
+    }else {
+        return false;
+    }
+}
 
 // TODO: don't forget exp multi for patreons
