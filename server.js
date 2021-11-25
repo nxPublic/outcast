@@ -55,6 +55,9 @@ client.on("ready", async () => {
 
 client.on("messageCreate", async (message) => {
 
+    if(message.author.bot)
+        return false;
+
     //C Suppress potential exploits
     message.content = message.content.trim().replace("@here", " here").replace("@everyone", " everyone");
 

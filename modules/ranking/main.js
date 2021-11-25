@@ -93,6 +93,8 @@ exports.addExp = async function (message) {
             grantUserRole(message.member, newRank);
         }
 
+    //console.log(`Successfully granted ${message.member.name} a total of ${exp} experience.`);
+
     return true;
 };
 

@@ -25,12 +25,38 @@ exports.startTwitter = async function (client, channel) {
             || tweet.in_reply_to_user_id
             || tweet.in_reply_to_user_id_str
             || tweet.in_reply_to_screen_name) {
-            return;
+            return false;
         } else {
+            let twitter = tweet;
 
-            const url = "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str;
+            let spl = twitter.created_at.split(" ");
+            let formatDate = spl[0] + " " + spl[1] + " " + spl[2] + " " + spl[5] + " " + spl[3]; // Format time string correctly.
 
-            channel.send(url);
+            let text = twitter.text.replace("<", "").replace(">", "");
+
+            if(twitter.entities.urls.length !== 0) // Remove auto added description link.
+                text = twitter.text.replace("<", "").replace(">", "").replace(twitter.entities.urls[0].url, "");
+
+            let embed = {
+                "description": text + "\n \n" + "[Click here to view tweet](https://twitter.com/i/web/status/" + twitter.id_str + ")",
+                "url": "https://twitter.com/grimdawn",
+                "color": 2992865,
+                "timestamp": new Date(formatDate),
+                "footer": {
+                    "icon_url": "https://theoutcast.de/img/twitter.png",
+                    "text": "Twitter"
+                },
+                "thumbnail": {
+                    "url": twitter.user.profile_image_url_https
+                },
+                "author": {
+                    "name": "Crate Entertainment",
+                    "url": "https://twitter.com/grimdawn",
+                    "icon_url": "https://theoutcast.de/img/crate.png"
+                }
+            };
+
+            channel.send({embeds: [embed]});
 
         }
     })

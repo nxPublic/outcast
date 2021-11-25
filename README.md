@@ -20,7 +20,7 @@ If you would like to know more about the functionalities and usage of the Bot in
 # Planned
 
 * Bring back the !tag functionalities.
-* Re-work the Twitter and Twitch Embeds.
+* Re-work the Twitch Embeds.
 * Create a function to generate the server rules.
 * Create a function to generate news posts.
 * Actually upload and host the bot
