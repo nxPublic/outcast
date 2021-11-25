@@ -54,6 +54,19 @@ exports.isOnlyForumLink = function (text) {
     return (text.length - linkLength) < 8;
 };
 
+exports.checkMessageForLink = async function (message){
+    let link = forumEmbeds.hasValidLink(message.content);
+    if(link !== false){
+        let embed = await forumEmbeds.embed(link);
+        message.channel.send({embeds: [embed]}).then(function (botMessage) {
+            if(forumEmbeds.isOnlyForumLink(message.content))
+                try { // in case the bot misses permissions to remove the message.
+                    message.delete();
+                }catch(error) { console.error(error);}
+        });
+    }
+};
+
 exports.embed = async function (link) {
     let data = await getThreadData(link);
     if(!data)
