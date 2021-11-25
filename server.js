@@ -78,7 +78,9 @@ client.on("messageCreate", async (message) => {
 
     if(message.content.startsWith("!notaffiliated")){
         let notAffiliatedRole = await server.roles.cache.find(r => r.name === "Not affiliated with Crate Entertainment.");
-        await message.member.roles.add(notAffiliatedRole);
+        if(notAffiliatedRole)
+            await message.member.roles.add(notAffiliatedRole);
+        await message.delete();
         return true;
     }
 

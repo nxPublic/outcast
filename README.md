@@ -16,6 +16,7 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Posts a embed to a channel everytime a developer posts in the forum with details.
 * Posts a embed when a official forum link is posted from the Grim Dawn or Farthest Frontier forum. Incuding removing the link if its only a link without additional context in the message.
 * <img src="./thunk.png" width="16" height="16"> ThinkMatics™
+* Various specific chat commands explained on the website.
 
 # Planned
 
