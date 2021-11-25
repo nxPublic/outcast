@@ -26,6 +26,8 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Actually upload and host the bot
 * Publish this repository
 * Add more ThinkMatics™
+* Add a message counter for daily messages
+* Bring back auto forum verification
 
 # Repository Specifics
 
