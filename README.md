@@ -25,6 +25,7 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Create a function to generate news posts.
 * Actually upload and host the bot
 * Publish this repository
+* Add more ThinkMatics™
 
 # Repository Specifics
 
