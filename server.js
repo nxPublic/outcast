@@ -4,6 +4,8 @@ require('./modules/globals.js');
 global.debug = false;
 global.skipTracker = true; // If set to true, the Forum Tracker will not initialize.
 
+global.ready = false;
+
 client.on("ready", async () => {
     console.log(`✔ Logged in as ${client.user.username}`);
 
@@ -50,12 +52,12 @@ client.on("ready", async () => {
         }
     }catch(error) { console.error(error);}
 
-
+    ready = true;
 });
 
 client.on("messageCreate", async (message) => {
 
-    if(message.author.bot)
+    if(message.author.bot ||!ready)
         return false;
 
     //C Suppress potential exploits
@@ -71,6 +73,14 @@ client.on("messageCreate", async (message) => {
 
     // Handle Ranking Progression
     ranking.addExp(message);
+
+
+
+    if(message.content.startsWith("!notaffiliated")){
+        let notAffiliatedRole = await server.roles.cache.find(r => r.name === "Not affiliated with Crate Entertainment.");
+        await message.member.roles.add(notAffiliatedRole);
+        return true;
+    }
 
 });
 
