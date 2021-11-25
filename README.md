@@ -17,7 +17,6 @@ If you would like to know more about the functionalities and usage of the Bot in
 * <img src="./thunk.png" width="16" height="16"> ThinkMatics™
 
 * TODO: Ranking
-* TODO: Http Gate
 
 
 # Repository Specifics
