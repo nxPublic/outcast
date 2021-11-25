@@ -18,24 +18,57 @@ let ranks = {
     Duke : {points: 1000000},
     God : {points:  9999999}
 };
+let allRanks = Object.keys(ranks);
 
 function calculateExperience(message){
-
     let multiplier = 1;
-
     // Patreon Supporters receive 150% more exp.
     if (message.member.roles.cache.some(role => role.name === 'Patron' || role.name === "Dedicated Patron" || "Honorary Patron" )) {
         multiplier = 2.5;
     }
-
     return (1 + (message.content.length / 20)) * multiplier;
+}
+
+async function getCurrentRank(member) {
+    let roles = member.roles.cache;
+    let roleCounter = 0;
+    let roleName = "";
+
+    // check each declared role with the present roles
+    await roles.forEach(function(role){
+        if(allRanks.includes(role.name)){
+            roleCounter += 1;
+            roleName = role.name;
+        }
+    });
+
+    // if has more than 1 role, remove all here and reapply the correct one (in the main function)
+    if(roleCounter >= 2){
+        await removeAllRankRoles(member,roles);
+    }
+
+    // return false if the user has no role
+    if(roleCounter === 0)
+        return false;
+
+    return roleName;
+}
+
+async function removeAllRankRoles(member, roles){
+    // Remove all rank roles from the member.
+    await roles.forEach(async function(role){
+        if(allRanks.includes(role.name)){
+            await member.roles.remove(role);
+        }
+    });
 }
 
 exports.addExp = async function (message) {
     // how much exp
     let exp = calculateExperience(message);
 
-    // build get api statement
+    let currentRank = await getCurrentRank(message.member); // false if no rank
+
     // {host}/api/exp/{key}/{uid}/{name}/{tag}/{nickname}/{avatar}/{exp}
     // key is the API key to receive access to the end point
     let httpGate = `${process.env.host}/${process.env.hostKey}/${message.author.id}/${message.author.username}/${message.author.discriminator}/${message.member.nickname}/${message.author.avatar}/${exp}`;
@@ -47,9 +80,20 @@ exports.addExp = async function (message) {
     }
     let response = data.data; // unwrap
 
-    // check if the current rank is the same rank after gaining exp
-    
-    // adjust rank if required
+    // check if the current rank is the same rank after gaining exp.
+    let newRank = response["name"];
+
+    if(currentRank !== newRank)
+        if(currentRank === false){
+            // assign new rank
+        }else{
+            // remove old rank
+            // assign new rank
+        }
+
+    let b;
+
+    // if adjustment is required, remove all rank roles and re-add the appropriate one.
 
 };
 
