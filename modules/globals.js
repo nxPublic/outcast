@@ -75,3 +75,6 @@ global.forumEmbeds = require('./forumEmbeds/main.js');
 //ThinkMatics™ by KidPid
 //Essentially a joke function that answers to text messages with emojis that are a mix of the 2 posted while removing the original ones.
 global.thinkMatics = require('./thinkmatics/engine.js');
+
+//Community Ranking
+global.ranking = require('./ranking/main.js');
