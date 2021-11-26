@@ -15,7 +15,7 @@ exports.startTwitter = async function (client, channel) {
     let twitterID_test = 2899773086; // Posts every 3 minutes.
 
 
-    let stream = T.stream('statuses/filter', {follow: twitterID});
+    let stream = T.stream('statuses/filter', {follow: twitterID_test});
 
     stream.on('tweet', async function (tweet) {
 
@@ -44,7 +44,7 @@ exports.startTwitter = async function (client, channel) {
                 "timestamp": new Date(formatDate),
                 "footer": {
                     "icon_url": "https://theoutcast.de/img/twitter.png",
-                    "text": "Twitter"
+                    "text": "Twitter - @GrimDawn"
                 },
                 "thumbnail": {
                     "url": twitter.user.profile_image_url_https

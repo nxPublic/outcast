@@ -49,6 +49,8 @@ exports.startTwitch = async function (client, channel) {
                 // Find the desired announcement channel
                 let channel = await client.channels.cache.get(process.env.channel_twitch);
 
+                // TODO: modify quality of embed and adjust design, post in both servers
+
                 // Post the Stream
                 channel.send('Stream is now **LIVE** playing ' + res.data.data[0].game_name + '\n**' + res.data.data[0].title + '**\nhttps://twitch.tv/admiralbulldog');
 

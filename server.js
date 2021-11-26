@@ -20,9 +20,9 @@ client.on("ready", async () => {
     }
 
     // Start Twitter listener
-    let twitterChannel = await server.channels.cache.get(process.env.channel_twitter);
-    if(twitterChannel !== undefined)
-        twitter.startTwitter(client, twitterChannel);
+    let twitterChannels = [process.env.channel_twitter_gd, process.env.channel_twitter_ff];
+    if(twitterChannels.length > 0)
+        await twitterChannels.forEach(async server => twitter.startTwitter(client, await client.channels.cache.get(process.env.channel_twitter)));
 
     // Start Twitch listener
     let twitchChannel = await server.channels.cache.get(process.env.channel_twitch);
@@ -78,9 +78,10 @@ client.on("messageCreate", async (message) => {
 
     if(message.content.startsWith("!notaffiliated")){
         let notAffiliatedRole = await server.roles.cache.find(r => r.name === "Not affiliated with Crate Entertainment.");
-        if(notAffiliatedRole)
+        if(notAffiliatedRole){
+            await message.delete();
             await message.member.roles.add(notAffiliatedRole);
-        await message.delete();
+        }
         return true;
     }
 
