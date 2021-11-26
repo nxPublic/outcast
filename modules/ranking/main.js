@@ -22,12 +22,13 @@ let allRanks = Object.keys(ranks);
 
 function calculateExperience(message){
     let multiplier = 1;
+
+    if (message.member.roles.cache.some(role => role.name === 'Nitro Booster')) {
+        multiplier = 2.0;
+    }
     // Patreon Supporters receive 150% more exp.
     if (message.member.roles.cache.some(role => role.name === 'Patron' || role.name === "Dedicated Patron" || "Honorary Patron" )) {
         multiplier = 2.5;
-    }
-    if (message.member.roles.cache.some(role => role.name === 'Nitro Booster')) {
-        multiplier = 2.0;
     }
     return (1 + (message.content.length / 20)) * multiplier;
 }
