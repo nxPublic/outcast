@@ -31,6 +31,8 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Support for crate entertainment streams on youtube
 * Auto remove links and invites from users without certain roles
 * Post about steam sales every time the game or its entensions are on sale
+* Extra EXP for posting images in #memes
+* Split message and EXP counters for FF and GD discord
 
 # Repository Specifics
 
