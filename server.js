@@ -22,13 +22,12 @@ client.on("ready", async () => {
     // Start Twitter listener
     let twitterChannels = [process.env.channel_twitter_gd, process.env.channel_twitter_ff];
     if(twitterChannels.length > 0)
-        await twitterChannels.forEach(async server => twitter.startTwitter(client, await client.channels.cache.get(process.env.channel_twitter)));
+        await twitterChannels.forEach(async server => twitter.startTwitter(await client.channels.cache.get(server)));
 
     // Start Twitch listener
     let twitchChannels = [process.env.channel_twitch_gd, process.env.channel_twitch_ff];
-    let twitchChannel = await server.channels.cache.get(process.env.channel_twitch);
-    if(twitchChannel !== undefined)
-        twitch.startTwitch(client, twitchChannel);
+    if(twitchChannels.length > 0)
+        await twitchChannels.forEach(async server => twitch.startTwitch(await client.channels.cache.get(server)));
 
     // Start Discourse Tracking (Forum Tracker)
     await require('./modules/forumTracker/getCategories');

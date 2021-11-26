@@ -9,13 +9,15 @@ let T = new Twit({
 });
 // @GrimDawn TwitterID: 106252041
 
-exports.startTwitter = async function (client, channel) {
+exports.startTwitter = async function (channel) {
 
     let twitterID = 106252041;
     let twitterID_test = 2899773086; // Posts every 3 minutes.
 
 
     let stream = T.stream('statuses/filter', {follow: twitterID_test});
+
+    console.log(`Twitter notifications loaded for ${channel.name}.`.green);
 
     stream.on('tweet', async function (tweet) {
 
@@ -66,5 +68,5 @@ exports.startTwitter = async function (client, channel) {
 
 };
 
-console.log("Twitter loaded".green);
+
 

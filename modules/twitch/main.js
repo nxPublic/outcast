@@ -1,4 +1,4 @@
-exports.startTwitch = async function (client, channel) {
+exports.startTwitch = async function (channel) {
 
     // Run once on initialization
     twitchCheck();
@@ -9,9 +9,9 @@ exports.startTwitch = async function (client, channel) {
     async function twitchCheck() {
 
         let name = "crateentertainment";
-        let testName = "admiralbulldog";
+        let testName = ""; // For debugging simply enter any Twitch user that's online.
 
-        console.log("=> Checking Twitch User ");
+        console.log(`Twitch notifications loaded for ${channel.name}.`.green);
 
         const sleep = ms => new Promise(res => setTimeout(res, ms));
         const res = await axios.get('https://api.twitch.tv/helix/streams?user_login=' +  name, {
@@ -22,10 +22,14 @@ exports.startTwitch = async function (client, channel) {
         });
 
 
-        // Is the Twtich stream offline?
-        if (res.data.data[0] === undefined) {
+        let isOnline = (res.data.data[0] !== undefined);
+        let stream = (isOnline ? res.data.data[0] : false);
 
-            console.log("Stream is offline");
+        // Is the Twtich stream offline?
+        if (!isOnline) {
+
+            if(debug)
+                console.log("Stream is offline");
 
             // Write to file that the stream is offline.
             fs.writeFile('./modules/twitch/live.txt', 'no', function (err) {
@@ -36,23 +40,39 @@ exports.startTwitch = async function (client, channel) {
         }
 
         // Is the twitch Stream online ?
-        if (res.data.data[0].type !== undefined) {
+        if (isOnline) {
             let lastLogged = fs.readFileSync('./modules/twitch/live.txt', 'utf8');
 
-            if (lastLogged.includes('no')) { // Only post the stream once.
+            if (lastLogged.includes('no') || lastLogged === "") { // Only post the stream once.
 
                 // Write to file that the stream is online.
-                fs.writeFile('./modules/twitch/live.txt', 'yes', function (err) {
-                    if (err) return console.log(err);
-                });
+                //fs.writeFile('./modules/twitch/live.txt', 'yes', function (err) {
+                //    if (err) return console.log(err);
+               // });
 
-                // Find the desired announcement channel
-                let channel = await client.channels.cache.get(process.env.channel_twitch);
+                // Post the Stream to the designated channel
+                let embed = {
+                    "title": stream["title"],
+                    "url": "https://www.twitch.tv/crateentertainment",
+                    "color": 6570906,
+                    "timestamp": stream["started_at"],
+                    "footer": {
+                        "icon_url": "http://theoutcast.de/img/crate.png",
+                        "text": "CrateEntertainment"
+                    },
+                    "image": {
+                        "url": stream["thumbnail_url"].replace("{width}", "480").replace("{height}", "270")
+                    },
+                    "author": {
+                        "name": "Twitch",
+                        "url": "https://www.twitch.tv/crateentertainment",
+                        "icon_url": "http://theoutcast.de/img/twitch.png"
+                    },
+                    "fields": [
+                    ]
+                };
 
-                // TODO: modify quality of embed and adjust design, post in both servers
-
-                // Post the Stream
-                channel.send('Stream is now **LIVE** playing ' + res.data.data[0].game_name + '\n**' + res.data.data[0].title + '**\nhttps://twitch.tv/admiralbulldog');
+                channel.send({embeds:[embed]});
 
             }
 
