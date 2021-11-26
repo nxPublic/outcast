@@ -11,6 +11,9 @@ let T = new Twit({
 
 exports.startTwitter = async function (channel) {
 
+    if(!channel)
+        return;
+
     let twitterID = 106252041;
     let twitterID_test = 2899773086; // Posts every 3 minutes.
 

@@ -1,5 +1,8 @@
 exports.startTwitch = async function (channel) {
 
+    if(!channel)
+        return;
+
     // Run once on initialization
     twitchCheck();
 

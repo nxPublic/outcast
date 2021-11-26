@@ -19,6 +19,8 @@ client.on("ready", async () => {
         global.server = server;
     }
 
+    // TODO: add handling for 2 discords, switch to channel names instead of ID's
+
     // Start Twitter listener
     let twitterChannels = [process.env.channel_twitter_gd, process.env.channel_twitter_ff];
     if(twitterChannels.length > 0)
