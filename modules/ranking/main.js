@@ -26,6 +26,9 @@ function calculateExperience(message){
     if (message.member.roles.cache.some(role => role.name === 'Patron' || role.name === "Dedicated Patron" || "Honorary Patron" )) {
         multiplier = 2.5;
     }
+    if (message.member.roles.cache.some(role => role.name === 'Nitro Booster')) {
+        multiplier = 2.0;
+    }
     return (1 + (message.content.length / 20)) * multiplier;
 }
 
