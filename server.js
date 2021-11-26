@@ -87,6 +87,10 @@ client.on("messageCreate", async (message) => {
         return true;
     }
 
+    if(message.content.startsWith("!test")){
+        await rules.readEmbeds(message.guild);
+    }
+
 });
 
 

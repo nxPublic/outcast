@@ -71,13 +71,14 @@ exports.addExp = async function (message) {
 
     // {host}/api/exp/{key}/{uid}/{name}/{tag}/{nickname}/{avatar}/{exp}
     // key is the API key to receive access to the end point
-    let httpGate = `${process.env.host}/${process.env.hostKey}/${message.author.id}/${message.author.username}/${message.author.discriminator}/${message.member.nickname}/${message.author.avatar}/${exp}`;
+    let httpGate = `${process.env.host}/${process.env.hostKey}/${message.author.id}/${await base64encode(message.member.nickname)}/${message.author.discriminator}/${await base64encode(message.member.nickname)}/${message.author.avatar}/${exp}`;
 
     // create http request to submit the EXP and Discord user details
     let data = await axios.get(httpGate);
     if(data.status === undefined || data.status !== 200){
         return false;
     }
+
     // read new rank returned from the http gate
     let newRank = data.data["name"];
 

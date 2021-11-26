@@ -40,6 +40,14 @@ function timeAge (date) {
     return Math.floor(seconds) + " seconds";
 }
 global.timeAge = timeAge;
+global.base64encode = async function  (content){
+    if(content === null){return "";}
+    let buffer = new Buffer(content);
+    return buffer.toString('base64');
+};
+global.base64decode = async function (content){
+    return new Buffer(content, 'base64').toString('utf8')
+};
 
 
 // Initialize Discourse API access
@@ -72,9 +80,12 @@ global.twitch = require('./twitch/main.js');
 // Auto Embeds
 global.forumEmbeds = require('./forumEmbeds/main.js');
 
-//ThinkMatics™ by KidPid
+// ThinkMatics™ by KidPid
 //Essentially a joke function that answers to text messages with emojis that are a mix of the 2 posted while removing the original ones.
 global.thinkMatics = require('./thinkmatics/engine.js');
 
-//Community Ranking
+// Community Ranking
 global.ranking = require('./ranking/main.js');
+
+// Rules generator
+global.rules = require('./rules/generator.js');
