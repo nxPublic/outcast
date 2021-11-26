@@ -25,6 +25,7 @@ client.on("ready", async () => {
         await twitterChannels.forEach(async server => twitter.startTwitter(client, await client.channels.cache.get(process.env.channel_twitter)));
 
     // Start Twitch listener
+    let twitchChannels = [process.env.channel_twitch_gd, process.env.channel_twitch_ff];
     let twitchChannel = await server.channels.cache.get(process.env.channel_twitch);
     if(twitchChannel !== undefined)
         twitch.startTwitch(client, twitchChannel);

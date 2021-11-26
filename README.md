@@ -37,6 +37,26 @@ If you would like to know more about the functionalities and usage of the Bot in
 * The file modules/global.js is used to import all and load all important globally required libraries and settings/configurations.
 * The folder modules/forumTracker/posts contains all Crate Forum tracked posts. *I recommend updating these files first yourself if you want to use this bot to any extend, otherwise it will post every post since the beginning of the forum from each employee. You can let the bot generate the files if you start it with the global variable Debug set to True in Server.js.* **THIS FUNCTIONALITY REQUIRES A DISCOURSE API KEY TO THE FORUM** 
 
+# DotEnv Variables
+These details must be placed in the .env file if you would like to host a version of this bot yourself.
+```ini
+BOT_TOKEN=
+twitter_consumer_key=
+twitter_consumer_secret=
+twitter_access_token=
+twitter_access_token_secret=
+twitch_client=
+twitch_auth=Bearer 
+FORUMAPIKEY=
+channel_twitch_gd=
+channel_twitch_ff=
+channel_twitter_gd=
+channel_twitter_ff=
+server_id=
+host=
+hostKey=
+```
+
 # Development History
 The original version *(and the idea)* of this bot was written by [evanronnei (Kidpid)](https://github.com/evanronnei/OutcastBot) in ~2016 with C Sharp. He hosted the bot on his Rasperry Pi first, for several months.
 The C Sharp library used for the Bot got regularly outdated and caused a lot of work to update the bot every month. That was unsustainable for the long term.
