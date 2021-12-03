@@ -91,6 +91,9 @@ exports.addExp = async function (message) {
     // read new rank returned from the http gate
     let newRank = data.data["name"];
 
+    // Example API return:
+    // {"name":"Initiate","color":"#A6FDF4","exp":47,"required_exp":1,"next_rank":{"required_exp":1500,"name":"Acolyte","color":"#3EFFAD"},"percentage":"3"}
+
     // check if the current rank is the same rank after gaining exp.
     if(currentRank !== newRank)
         if(currentRank === false){
