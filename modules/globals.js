@@ -40,10 +40,10 @@ function timeAge (date) {
     return Math.floor(seconds) + " seconds";
 }
 global.timeAge = timeAge;
-global.base64encode = async function  (content){
-    if(content === null){return "";}
-    let buffer = new Buffer(content);
-    return buffer.toString('base64');
+global.base64encode = async function  (content = ""){
+    if(content === null || content === ""){return "";}
+    let buff = Buffer.from(content, 'utf-8');
+    return buff.toString('base64');
 };
 global.base64decode = async function (content){
     return new Buffer(content, 'base64').toString('utf8')
