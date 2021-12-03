@@ -11,6 +11,7 @@ client.on("ready", async () => {
 
     let server = await client.guilds.cache.find(r => r.id === process.env.server_id);
 
+
     if(server === undefined){
         console.log(`ERROR: Could not find Guild by specified ID.`);
         process.exit(1); // Quit process if the guild is not found.
@@ -19,12 +20,9 @@ client.on("ready", async () => {
         global.server = server;
     }
 
-    // TODO: add handling for 2 discords, switch to channel names instead of ID's
-
     // Start Twitter listener
     let twitterChannels = [process.env.channel_twitter_gd, process.env.channel_twitter_ff];
-    if(twitterChannels.length > 0)
-        await twitterChannels.forEach(async server => twitter.startTwitter(await client.channels.cache.get(server)));
+    await twitter.startTwitter(twitterChannels);
 
     // Start Twitch listener
     let twitchChannels = [process.env.channel_twitch_gd, process.env.channel_twitch_ff];
@@ -87,6 +85,8 @@ client.on("messageCreate", async (message) => {
         return true;
     }
 
+
+    // TODO
     if(message.content.startsWith("!test")){
         await rules.readEmbeds(message.guild);
     }
