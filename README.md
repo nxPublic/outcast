@@ -24,7 +24,6 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Create a function to generate the server rules.
 * Create a function to generate news posts.
 * Actually upload and host the bot
-* Publish this repository
 * Add more ThinkMatics™
 * Add a message counter for daily messages
 * Bring back auto forum verification
@@ -33,6 +32,7 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Post about steam sales every time the game or its entensions are on sale
 * Extra EXP for posting images in #memes
 * Split message and EXP counters for FF and GD discord
+* Receive EXP for message reactions in #memes
 
 # Repository Specifics
 
