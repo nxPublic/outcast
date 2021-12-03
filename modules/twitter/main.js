@@ -9,9 +9,11 @@ let T = new Twit({
 });
 // @GrimDawn TwitterID: 106252041
 
-exports.startTwitter = async function (channel) {
+exports.startTwitter = async function (channels = []) {
 
-    if(!channel)
+    console.log(`Twitter notifications loaded for ${channels.length} channels.`.green);
+
+    if(!channels || channels.length === 0)
         return;
 
     let twitterID = 106252041;
@@ -20,7 +22,6 @@ exports.startTwitter = async function (channel) {
 
     let stream = T.stream('statuses/filter', {follow: twitterID_test});
 
-    console.log(`Twitter notifications loaded for ${channel.name}.`.green);
 
     stream.on('tweet', async function (tweet) {
 
@@ -61,12 +62,28 @@ exports.startTwitter = async function (channel) {
                 }
             };
 
-            channel.send({embeds: [embed]});
+            // each channel instead
+            await channels.forEach(async channel =>
+                await sendEmbedToChannel(channel, embed)
+            );
+
+
 
         }
-    })
+    });
 
+    async function sendEmbedToChannel(channel_id, embed){
+        // Find the channel in bot chache
+        let channel = await client.channels.cache.get(channel_id);
 
+        // If its not found, quit
+        if(!channel)
+            return false;
+
+        channel.send({embeds: [embed]});
+
+        return true;
+    }
     
 
 };
