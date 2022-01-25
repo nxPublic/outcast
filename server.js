@@ -9,15 +9,16 @@ global.ready = false;
 client.on("ready", async () => {
     console.log(`✔ Logged in as ${client.user.username}`);
 
-    let server = await client.guilds.cache.find(r => r.id === process.env.server_id);
 
-
-    if(server === undefined){
-        console.log(`ERROR: Could not find Guild by specified ID.`);
-        process.exit(1); // Quit process if the guild is not found.
-    }else{
-        console.log(`Found ${server.name} Server`);
-        global.server = server;
+    // Preload all guilds of relevance to be sure we have access to the channels in the cache.
+    let preLoadServers = ["119758608765288449" /* Grim Dawn */, "793538239587811378" /* Farthest Frontier */];
+    for (let i in preLoadServers){
+        let s = await client.guilds.cache.find(r => r.id === preLoadServers[i]);
+        if(s){
+            await s.fetch();
+            console.log(`Found ${s.name} Server`.green);
+        }else
+            console.log(`Couldn't find ${preLoadServers[i]} Server`.red);
     }
 
     // Start Twitter listener
@@ -27,7 +28,7 @@ client.on("ready", async () => {
     // Start Twitch listener
     let twitchChannels = [process.env.channel_twitch_gd, process.env.channel_twitch_ff];
     if(twitchChannels.length > 0)
-        await twitchChannels.forEach(async server => twitch.startTwitch(await client.channels.cache.get(server)));
+        await twitch.startTwitch(twitchChannels);
 
     // Start Discourse Tracking (Forum Tracker)
     await require('./modules/forumTracker/getCategories');

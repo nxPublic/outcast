@@ -1,6 +1,6 @@
-exports.startTwitch = async function (channel) {
+exports.startTwitch = async function (channels) {
 
-    if(!channel)
+    if(!channels)
         return;
 
     // Run once on initialization
@@ -12,9 +12,9 @@ exports.startTwitch = async function (channel) {
     async function twitchCheck() {
 
         let name = "crateentertainment";
-        let testName = ""; // For debugging simply enter any Twitch user that's online.
+        // name = "anton"; // For debugging simply enter any Twitch user that's online.
 
-        console.log(`Twitch notifications loaded for ${channel.name}.`.green);
+        console.log(`Twitch notifications loaded.`.green);
 
         const sleep = ms => new Promise(res => setTimeout(res, ms));
         const res = await axios.get('https://api.twitch.tv/helix/streams?user_login=' +  name, {
@@ -75,13 +75,29 @@ exports.startTwitch = async function (channel) {
                     ]
                 };
 
-                channel.send({embeds:[embed]});
+                // TODO: send to multiple channels instead
+                await channels.forEach(async channel =>
+                    await sendEmbedToChannel(channel, embed)
+                );
 
             }
 
         }
 
 
+    }
+
+    async function sendEmbedToChannel(channel_id, embed){
+        // Find the channel in bot chache
+        let channel = await client.channels.cache.get(channel_id);
+
+        // If its not found, quit
+        if(!channel)
+            return false;
+
+        channel.send({embeds: [embed]});
+
+        return true;
     }
 
 
