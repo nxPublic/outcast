@@ -2,7 +2,7 @@
 require('./modules/globals.js');
 
 global.debug = false;
-global.skipTracker = false; // If set to true, the Forum Tracker will not initialize.
+global.skipTracker = true; // If set to true, the Forum Tracker will not initialize.
 
 global.ready = false;
 
@@ -80,7 +80,6 @@ client.on("messageCreate", async (message) => {
         ranking.addExp(message);
 
 
-
     if(message.content.startsWith("!notaffiliated")){
         let notAffiliatedRole = await server.roles.cache.find(r => r.name === "Not affiliated with Crate Entertainment.");
         if(notAffiliatedRole){
@@ -92,11 +91,12 @@ client.on("messageCreate", async (message) => {
 
 
     // TODO: Generate Rules channel content
-
+    if(message.content === "p")
+        rules.postRules(message.channel);
 
 });
 
 
 
 // Login
-client.login(process.env.BOT_TOKEN_OUTCAST);
+client.login(process.env.BOT_TOKEN);
