@@ -21,6 +21,8 @@ client.on("ready", async () => {
             console.log(`Couldn't find ${preLoadServers[i]} Server`.red);
     }
 
+    // TODO: Add proper channel id's into the .env file for the announcement channels appropriate
+
     // Start Twitter listener
     let twitterChannels = [process.env.channel_twitter_gd, process.env.channel_twitter_ff];
     await twitter.startTwitter(twitterChannels);
@@ -87,7 +89,7 @@ client.on("messageCreate", async (message) => {
     }
 
 
-    // TODO
+    // TODO: Generate Rules channel content
     if(message.content.startsWith("!test")){
         await rules.readEmbeds(message.guild);
     }

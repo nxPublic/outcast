@@ -23,22 +23,28 @@ let allRanks = Object.keys(ranks);
 function calculateExperience(message){
     let multiplier = 1;
 
+    // Patreon Supporters receive 100% more exp.
     if (message.member.roles.cache.some(role => role.name === 'Nitro Booster')) {
         multiplier = 2.0;
     }
+
     // Patreon Supporters receive 150% more exp.
-    if (message.member.roles.cache.some(role => role.name === 'Patron' || role.name === "Dedicated Patron" || "Honorary Patron" )) {
+    if (message.member.roles.cache.some(role => role.name === 'Patron' || role.name === "Dedicated Patron" || role.name === "Honorary Patron" )) {
         multiplier = 2.5;
     }
+
     return (1 + (message.content.length / 20)) * multiplier;
 }
 
+
+// Returns the current role name or FALSE
 async function getCurrentRank(member) {
     let roles = member.roles.cache;
     let roleCounter = 0;
     let roleName = "";
 
     // check each declared role with the present roles
+    // TODO: this should be a FOR loop instead of a forEach
     await roles.forEach(function(role){
         if(allRanks.includes(role.name)){
             roleCounter += 1;
@@ -60,6 +66,7 @@ async function getCurrentRank(member) {
 
 async function removeAllRankRoles(member, roles){
     // Remove all rank roles from the member.
+    // TODO: should be a for loop
     await roles.forEach(async function(role){
         if(allRanks.includes(role.name)){
             await member.roles.remove(role);
@@ -70,6 +77,10 @@ async function removeAllRankRoles(member, roles){
 exports.addExp = async function (message) {
     // how much exp
     let exp = calculateExperience(message);
+
+    // TODO: handling of higher level roles being present than in the database
+    // compare rank index
+    // database gateway for upping EXP for a user
 
     let currentRank = await getCurrentRank(message.member); // false if no rank
 
@@ -131,4 +142,3 @@ async function grantUserRole(member, role){
     }
 }
 
-// TODO: don't forget exp multi for patreons
