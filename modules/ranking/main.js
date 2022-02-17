@@ -74,23 +74,24 @@ async function removeAllRankRoles(member, roles){
     });
 }
 
-exports.addExp = async function (message) {
-    // how much exp
-    let exp = calculateExperience(message);
+async function getRankIndexByName(name){
+    let index = await allRanks.indexOf(name);
 
-    // TODO: handling of higher level roles being present than in the database
-    // compare rank index
-    // database gateway for upping EXP for a user
+    // If the user doesn't have a role, return false.
+    if(index === -1)
+        return false;
 
-    let currentRank = await getCurrentRank(message.member); // false if no rank
+    return index;
+}
 
-    // {host}/api/exp/{key}/{uid}/{name}/{tag}/{nickname}/{avatar}/{exp}
-    // key is the API key to receive access to the end point
-
-
+async function grantUserExp(message, exp) {
+    // sanitize data
     let nickname = await base64encode((!message.member.nickname || message.member.nickname === "" ? "null" : message.member.nickname));
     let name = await base64encode(message.author.username);
 
+    // API Gate
+    // {host}/api/exp/{key}/{uid}/{name}/{tag}/{nickname}/{avatar}/{exp}
+    // key is the API key to receive access to the end point
     let httpGate = `${process.env.host}/${process.env.hostKey}/${message.author.id}/${name}/${message.author.discriminator}/${nickname}/${message.author.avatar}/${exp}`;
 
     // create http request to submit the EXP and Discord user details
@@ -99,31 +100,61 @@ exports.addExp = async function (message) {
         return false;
     }
 
+    return data;
+}
+
+exports.addExp = async function (message) {
+
+    // TODO: PROPER MULTI DISCORD SUPPORT
+    // TODO: PROPER FF DISCORD RANKING
+
+    // how much exp to grant the user based on his message
+    let exp = calculateExperience(message);
+
+    let currentRank = await getCurrentRank(message.member); // false if no rank
+
+    let data = await grantUserExp(message, exp);
+
     // read new rank returned from the http gate
     let newRank = data.data["name"];
 
     // Example API return:
     // {"name":"Initiate","color":"#A6FDF4","exp":47,"required_exp":1,"next_rank":{"required_exp":1500,"name":"Acolyte","color":"#3EFFAD"},"percentage":"3"}
 
-    // check if the current rank is the same rank after gaining exp.
-    if(currentRank !== newRank)
-        if(currentRank === false){
-            // assign new rank
-            grantUserRole(message.member, newRank);
-        }else{
-            // remove all old rank
-            removeAllRankRoles(message.member, message.member.roles.cache);
-            // assign new rank
-            grantUserRole(message.member, newRank);
+
+    // check if the current rank is the same rank after gaining exp and if the user has a role that's higher than the one in the database.
+    if(currentRank !== newRank){
+
+        // Handles missing EXP from user roles that are higher in order than the ones assigned in the database.
+        // Check if the index of the returned rank is lower than the present one
+        // If it is, grant the user EXP that is equal to the missing EXP
+        if(await getRankIndexByName(currentRank) > await getRankIndexByName(newRank)){
+            // calculate the missing EXP between the current database EXP state and the present role
+            let expMissing = ranks[currentRank].points - data.data["exp"];
+            await grantUserExp(message, expMissing);
+        }else {
+            // Add the new rank to the user / remove all unfitting ones
+            if(currentRank === false){
+                // assign new rank
+                grantUserRole(message.member, newRank);
+            }else{
+                // remove all old rank
+                removeAllRankRoles(message.member, message.member.roles.cache);
+                // assign new rank
+                grantUserRole(message.member, newRank);
+            }
         }
 
-    //console.log(`Successfully granted ${message.member.name} a total of ${exp} experience.`);
+    }
+
+    if(global.debug)
+        console.log(`Successfully granted ${message.member.name} a total of ${exp} experience.`);
 
     return true;
 };
 
-async function getRoleByName(name) {
-    let role = await server.roles.cache.find(r => r.name === name);
+async function getRoleByName(name, guild) {
+    let role = await guild.roles.cache.find(r => r.name === name);
 
     // return false if the role is not found.
     if(role === undefined || role === false)
@@ -133,7 +164,7 @@ async function getRoleByName(name) {
 }
 
 async function grantUserRole(member, role){
-    let roleToAssign = await getRoleByName(role);
+    let roleToAssign = await getRoleByName(role, member.guild);
     if(roleToAssign){
         await member.roles.add(roleToAssign);
         return true;

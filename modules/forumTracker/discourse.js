@@ -84,14 +84,18 @@ class grimDawnForumTracker {
                                 }
                             ]
                         };
-                        let channel = await server.channels.cache.find(r => r.name === "test");
 
                         let isAlreadyPosted = await registerPost(post.post.id, post.author.name);
 
                         if(!isAlreadyPosted){
                             console.log("POST " + post.post.id);
-                            if(global.debug !== true)
-                                channel.send({ embeds: [embed] });
+                            if(global.debug !== true){
+                                let grimDawnDiscordTrackerChannel = await client.channels.cache.find(r => r.id === process.env.channel_tracker_gd);
+                                let farthestFrontierDiscordTrackerChannel = await client.channels.cache.find(r => r.id === process.env.channel_tracker_ff);
+                                grimDawnDiscordTrackerChannel.send({ embeds: [embed] });
+                                farthestFrontierDiscordTrackerChannel.send({ embeds: [embed] });
+                            }
+
                         }
 
 

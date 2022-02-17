@@ -39,7 +39,7 @@ If you would like to know more about the functionalities and usage of the Bot in
 * The folder modules/ contains all main functionalities of the bot, split by folder and module.
 * The file server.js is only supposed to be used as a general handler for the Discord API calls, secondary functions and logic should be placed in appropriate modules.
 * The file modules/global.js is used to import all and load all important globally required libraries and settings/configurations.
-* The folder modules/forumTracker/posts contains all Crate Forum tracked posts. *I recommend updating these files first yourself if you want to use this bot to any extend, otherwise it will post every post since the beginning of the forum from each employee. You can let the bot generate the files if you start it with the global variable Debug set to True in Server.js.* **THIS FUNCTIONALITY REQUIRES A DISCOURSE API KEY TO THE FORUM** 
+* The folder modules/forumTracker/posts contains all Crate Forum tracked posts. *I recommend updating these files first yourself if you want to use this bot to any extend, otherwise it will post every post since the beginning of the forum from each employee. You can let the bot generate the files if you start it with the global variable Debug set to True in Server.js.* **THIS FUNCTIONALITY REQUIRES A DISCOURSE API KEY TO THE FORUM, MEANING YOU WILL NOT HAVE ACCESS TO THIS FUNCTION** 
 
 # DotEnv Variables
 These details must be placed in the .env file if you would like to host a version of this bot yourself.

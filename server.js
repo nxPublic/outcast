@@ -2,16 +2,16 @@
 require('./modules/globals.js');
 
 global.debug = false;
-global.skipTracker = true; // If set to true, the Forum Tracker will not initialize.
+global.skipTracker = false; // If set to true, the Forum Tracker will not initialize.
 
 global.ready = false;
+
+let preLoadServers = [process.env.guild_gd /* Grim Dawn */, process.env.guild_ff /* Farthest Frontier */];
 
 client.on("ready", async () => {
     console.log(`✔ Logged in as ${client.user.username}`);
 
-
     // Preload all guilds of relevance to be sure we have access to the channels in the cache.
-    let preLoadServers = ["119758608765288449" /* Grim Dawn */, "793538239587811378" /* Farthest Frontier */];
     for (let i in preLoadServers){
         let s = await client.guilds.cache.find(r => r.id === preLoadServers[i]);
         if(s){
@@ -75,7 +75,9 @@ client.on("messageCreate", async (message) => {
     }
 
     // Handle Ranking Progression
-    ranking.addExp(message);
+    // TODO: proper multi discord handling for the ranking
+    if(message.guild.id === process.env.guild_gd)
+        ranking.addExp(message);
 
 
 
@@ -90,13 +92,11 @@ client.on("messageCreate", async (message) => {
 
 
     // TODO: Generate Rules channel content
-    if(message.content.startsWith("!test")){
-        await rules.readEmbeds(message.guild);
-    }
+
 
 });
 
 
 
 // Login
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN_OUTCAST);
