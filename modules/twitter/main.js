@@ -7,7 +7,6 @@ let T = new Twit({
     timeout_ms: 60 * 1000,  // optional HTTP request timeout to apply to all requests.
     strictSSL: true,     // optional - requires SSL certificates to be valid.
 });
-// @GrimDawn TwitterID: 106252041
 
 exports.startTwitter = async function (channels = []) {
 
@@ -16,11 +15,12 @@ exports.startTwitter = async function (channels = []) {
     if(!channels || channels.length === 0)
         return;
 
+    // @GrimDawn TwitterID: 106252041
     let twitterID = 106252041;
-    let twitterID_test = 2899773086; // Posts every 3 minutes.
+    //let twitterID_test = 2899773086; // Posts every 3 minutes.
 
 
-    let stream = T.stream('statuses/filter', {follow: twitterID_test});
+    let stream = T.stream('statuses/filter', {follow: twitterID});
 
 
     stream.on('tweet', async function (tweet) {
