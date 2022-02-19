@@ -11,6 +11,9 @@ let preLoadServers = [process.env.guild_gd /* Grim Dawn */, process.env.guild_ff
 client.on("ready", async () => {
     console.log(`✔ Logged in as ${client.user.username}`);
 
+    // Might take a few minutes to propagate to every user in the server.
+    await client.user.setPresence({ activities: [{ name: 'http://theoutcast.de' }], status: 'online' });
+
     // Preload all guilds of relevance to be sure we have access to the channels in the cache.
     for (let i in preLoadServers){
         let s = await client.guilds.cache.find(r => r.id === preLoadServers[i]);
@@ -63,7 +66,10 @@ client.on("messageCreate", async (message) => {
     if(message.author.bot ||!ready)
         return false;
 
-    //C Suppress potential exploits
+    // Check if the message contains any link and if the user is allowed to post it.
+
+
+    // Suppress potential exploits
     message.content = message.content.trim().replace("@here", " here").replace("@everyone", " everyone");
 
     // Thinkmatics
@@ -90,9 +96,11 @@ client.on("messageCreate", async (message) => {
     }
 
 
-    // TODO: Generate Rules channel content
-    if(message.content === "p" && message.author.username === "nx")
-        rules.grimDawnRules(message.channel, message.guild);
+    if(message.author.username === "nx")
+        console.log(await links.isMessageSus(message));
+
+    // TODO: proper command for posting to the rules channel for moderators.
+    // TODO: proper link and sus level check (finalization)
 
 });
 

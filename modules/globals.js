@@ -90,3 +90,6 @@ global.ranking = require('./ranking/main.js');
 
 // Rules generator
 global.rules = require('./rules/generator.js');
+
+// Rules generator
+global.links = require('./linkcheck.js');
