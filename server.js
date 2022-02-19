@@ -91,12 +91,12 @@ client.on("messageCreate", async (message) => {
 
 
     // TODO: Generate Rules channel content
-    if(message.content === "p")
-        rules.postRules(message.channel);
+    if(message.content === "p" && message.author.username === "nx")
+        rules.grimDawnRules(message.channel, message.guild);
 
 });
 
 
 
 // Login
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN_OUTCAST);
