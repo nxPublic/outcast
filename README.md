@@ -17,18 +17,18 @@ If you would like to know more about the functionalities and usage of the Bot in
 * Posts a embed when a official forum link is posted from the Grim Dawn or Farthest Frontier forum. Incuding removing the link if its only a link without additional context in the message.
 * <img src="./thunk.png" width="16" height="16"> ThinkMatics™
 * Various specific chat commands explained on the website.
+* A function to generate the server rules.
 
 # Planned
 
 * Bring back the !tag functionalities.
-* Create a function to generate the server rules.
 * Create a function to generate news posts.
 * Actually upload and host the bot
 * Add more ThinkMatics™
-* Add a message counter for daily messages
+* Add a counters for daily messages and other statistics on the website
 * Bring back auto forum verification
 * Support for crate entertainment streams on youtube
-* Auto remove links and invites from users without certain roles
+* Auto remove links and invites from users without certain roles or 2FA
 * Post about steam sales every time the game or its entensions are on sale
 * Extra EXP for posting images in #memes
 * Split message and EXP counters for FF and GD discord
