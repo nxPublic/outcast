@@ -14,7 +14,8 @@ exports.startTwitch = async function (channels) {
         let name = "crateentertainment";
         // name = "anton"; // For debugging simply enter any Twitch user that's online.
 
-        console.log(`Twitch notifications loaded.`.green);
+        if(global.debug)
+            console.log(`Twitch notifications loaded.`.green);
 
         const sleep = ms => new Promise(res => setTimeout(res, ms));
         const res = await axios.get('https://api.twitch.tv/helix/streams?user_login=' +  name, {
