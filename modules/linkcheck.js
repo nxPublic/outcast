@@ -56,7 +56,7 @@ exports.removeAndNotify = async function (message, susMessage, susDomain) {
         let embed = {
             color: ((susMessage + susDomain) > 5 ? 0xd2193e : 0x19d247),
             title : "ඞ Removed a message from a suspicious user.", // AMOGUS
-            description : message.author.toString() + " inside " + message.channel.toString() + "\n```" + message.content + "```",
+            description : message.author.toString() + " inside " + message.channel.toString() + " (" + message.member.joinedAt + " [" + message.member.joinedTimestamp + "]) \n```" + message.content + "```",
             fields: [
                 {
                     "name": "Suspicion level of Domain",
