@@ -81,7 +81,6 @@ client.on("messageCreate", async (message) => {
     }
 
     // Handle Ranking Progression
-    // TODO: proper multi discord handling for the ranking
     if(message.guild.id === process.env.guild_gd)
         ranking.addExp(message);
 
@@ -95,12 +94,36 @@ client.on("messageCreate", async (message) => {
         return true;
     }
 
+    // Link check to combat bots
+    let linkArray = await links.hasLink(message);
+    let susLevelMessage = await links.isMessageSus(message);
+    if(linkArray !== false){
 
-    if(message.author.username === "nx")
-        console.log(await links.isMessageSus(message));
+        // is allowed to post links ?
+        // check rank
+        let sus = false;
+        let rank = await ranking.getMemberRank(message.member);
+        if(rank === "Initiate" || rank === false){
+            sus = true;
+        }
+
+        // calculate sus level of the domains in the message
+        let susLevelDomain = 0;
+        for(let link in linkArray){
+            susLevelDomain += linkArray[link]["susLevel"];
+        }
+
+        // If user has a user rank have a higher threshold for removal of links
+        if(sus || (susLevelDomain + susLevelMessage) >= 8){
+            // remove message and post moderation notification if sus level is above a certain level
+            if((susLevelDomain + susLevelMessage) >= 5)
+                await links.removeAndNotify(message, susLevelMessage, susLevelDomain )
+        }
+    }
+
 
     // TODO: proper command for posting to the rules channel for moderators.
-    // TODO: proper link and sus level check (finalization)
+
 
 });
 

@@ -36,6 +36,9 @@ function calculateExperience(message){
     return (1 + (message.content.length / 20)) * multiplier;
 }
 
+exports.getMemberRank = async function (member) {
+    return await getCurrentRank(member);
+};
 
 // Returns the current role name or FALSE
 async function getCurrentRank(member) {
@@ -105,8 +108,7 @@ async function grantUserExp(message, exp) {
 
 exports.addExp = async function (message) {
 
-    // TODO: PROPER MULTI DISCORD SUPPORT
-    // TODO: PROPER FF DISCORD RANKING
+    // TODO: PROPER MULTI DISCORD SUPPORT FOR FARTHEST FRONTIER
 
     // how much exp to grant the user based on his message
     let exp = calculateExperience(message);
