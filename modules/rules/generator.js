@@ -27,7 +27,8 @@ exports.grimDawnRules = async function (channel, guild) {
         "**6.** Moderators and Admins private message you for a reason, listen.\n" +
         "**7.** Do not advertise or encourage anything that is against the TOS/EULA of Grim Dawn.\n" +
         "**8.** Do not advertise any kind of Discord/community/campaign or other links without permission. \n" +
-        "**9.** Check the links down below before asking for support.\n"
+        "**9.** Check the links down below before asking for support.\n"+
+        "**10.** Political discussions and topics shall be kept short or entirely avoided if possible in all channels.\n"
     };
     await channel.send({ embeds:[embed] });
 
@@ -221,6 +222,40 @@ exports.grimDawnRules = async function (channel, guild) {
     };
     await channel.send({embeds:[embed]});
 
+
+    // The Outcast
+    await channel.send({ files: ['./modules/rules/resources/outcast.png'] });
+
+    embed = {
+        title : "General Information",
+        description : "**User Ranking**\n" +
+            "Every message you type grants you a certain amount of experience towards a user rank.\n" +
+            "There is also a [top 30 ranking](http://theoutcast.de/ranking/introduction) of chat members in the discord. \n" +
+            "You can find all user ranks and experience thresholds [on this page](http://theoutcast.de/ranking).\n" +
+            "\n**Crate Entertainment Tracker**\n" +
+            "The bot automatically follows every developer of grim dawn (Crate Entertainment) inside [the official forum](https://forums.crateentertainment.com/) and posts their replies to " + getChannel("crate-tracker", guild) + ".\n" +
+            "It also automatically posts [Twitch](https://www.twitch.tv/crateentertainment) streams and [Twitter](https://twitter.com/GrimDawn) posts from Crate Entertainment to " + getChannel("social-media", guild) + ". /n"+
+            "\n**Auto embeds**\n" +
+            "Auto embeds with additional information about [official forum](https://forums.crateentertainment.com/) links that have been posted. \n" +
+            " \n**Open Source**\n" +
+            "If you would like to help to improve on the bot in our discord or are in general curios on how it works you can find the [source code on github](https://github.com/nxPublic/outcast). \n" +
+            " \n\n:thinking: This bot also supports **ThinkMatics™**"
+    };
+    await channel.send({embeds:[embed]});
+
+    // Patreon
+    embed = {
+        color: 16345172,
+        title : "Patreon",
+        description : "With patreon you have the ability to help us each month. You can select the amount you want to donate to us monthly. A single dollar on a monthly basis already covers almost 10% of our monthly server costs! Thanks for the generous support of this community for the past years! Sadly, we are required to ask for support since website and bot hosting is not free and unsustainable without it.\n"+
+            "Please visit [Patreon](https://patreon.com/user?u=12740305) for more.",
+        "thumbnail": {
+            "url": "https://cdn.discordapp.com/attachments/426464234994532364/516954739582304256/patreon.png"
+        }
+    };
+    await channel.send({embeds:[embed]});
+
+
     // Linkbase
     await channel.send({ files: ['./modules/rules/resources/linkbase.png'] });
     embed = {
@@ -232,13 +267,13 @@ exports.grimDawnRules = async function (channel, guild) {
         "Grim Dawn Reddit \n" +
         "https://www.reddit.com/r/Grimdawn/\n" +
         "Grim Dawn Wikipedia \n" +
-        "http://grimdawn.gamepedia.com/Grim_Dawn_Wiki\n" +
+        "https://grimdawn.fandom.com/wiki/Grim_Dawn_Wiki\n" +
         "\n" +
         "**Useful Links**\n" +
         "Grim Dawn Online Map \n" +
         "https://www.grimtools.com/map/\n" +
-        "Grim Dawn Build Compendium \n" +
-        "http://www.grimdawn.com/forums/showthread.php?t=79419\n" +
+        "Grim Dawn Build Compendiums \n" +
+        "https://forums.crateentertainment.com/t/build-compendiums/82060\n" +
         "Grim Dawn F.A.Q \n" +
         "https://tinyurl.com/n676c8y\n" +
         "Character Builder/Planner \n" +
@@ -248,17 +283,18 @@ exports.grimDawnRules = async function (channel, guild) {
         "Monster Database \n" +
         "https://www.grimtools.com/monsterdb/\n" +
         "Shrine/Chest/Quest Tracker \n" +
-        "http://grimchecklist.com/\n" +
+        "https://www.grimtools.com/checklist/shrines/normal \n" +
         "Relic Recipe Breakdown \n" +
         "https://koomzog.github.io/GrimDawnRelics/\n" +
         "Resistance Reduction Cheat Sheet \n" +
         "https://tinyurl.com/yya5hmo2\n" +
         "Modding Beginners Guide \n" +
-        "http://www.grimdawn.com/forums/showthread.php?t=51590\n" +
+        "https://forums.crateentertainment.com/t/grim-dawns-modding-tools-user-generated-tutorials-to-get-started/32104\n" +
         "GD Acronym and Abbreviation List \n" +
-        "http://www.grimdawn.com/forums/showthread.php?t=32904"
+        "https://forums.crateentertainment.com/t/gd-acronym-and-abbreviation-list/29433"
     };
     await channel.send({embeds:[embed]});
+
 
 
 };
