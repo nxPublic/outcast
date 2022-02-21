@@ -44,6 +44,7 @@ If you would like to know more about the functionalities and usage of the Bot in
 # DotEnv Variables
 These details must be placed in the .env file if you would like to host a version of this bot yourself.
 ```ini
+BOT_TOKEN_OUTCAST=
 BOT_TOKEN=
 twitter_consumer_key=
 twitter_consumer_secret=
@@ -56,6 +57,10 @@ channel_twitch_gd=
 channel_twitch_ff=
 channel_twitter_gd=
 channel_twitter_ff=
+channel_tracker_gd=
+channel_tracker_ff=
+guild_gd=
+guild_ff=
 server_id=
 host=
 hostKey=
