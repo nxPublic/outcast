@@ -12,7 +12,6 @@ exports.hasLink = async function (message) {
     let links = [];
 
     for(let data in matches){
-        // check if it is a grimtools link or a forum link
         /* OUTPUT
   0 "https://www.google.com.tr/admin/subPage?qs1=sss1&qs2=sss2&qs3=sss3#Services", // full
   1 "https://www.google.com.tr", // protocol + domain
@@ -49,7 +48,7 @@ exports.removeAndNotify = async function (message, susMessage, susDomain) {
 
         let channel = message.guild.channels.cache.find(r => r.name === "🔒-shitcloset");
 
-        // return false if the role is not found.
+        // return false if the channel is not found.
         if(channel === undefined || channel === false)
             return false;
 
